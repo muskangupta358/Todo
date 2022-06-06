@@ -10,15 +10,11 @@ const todoReducer = (state=initialState,action) => {
             return {...state, data : [...state.data,action.payload]};
         }
         case editTodo : {
-            let updatedArray = [...state.data];
-            updatedArray[action.payload.index] = action.payload.item;
-            return {...state, data : updatedArray};
+            return {...state, data : state.data.map(obj => obj.todoId === action.payload.id ? {...obj,...action.payload.item} : obj)}
         }
         case deleteTodo :
             {
-                let deletedArray = [...state.data];
-                deletedArray.splice(action.payload,1)
-                return {...state, data : deletedArray};
+                return {...state, data : state.data.filter(obj => obj.todoId !== action.payload)} ;
             }
         default : return state
     }

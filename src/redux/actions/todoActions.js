@@ -5,12 +5,12 @@ type : addTodo,
 payload : item,
 });
 
-export const edit = (index,item) => ({
+export const edit = (id,item) => ({
     type : editTodo,
-    payload : {index,item},
+    payload : {id,item},
 });
 
-export const del = (index) => ({
+export const del = (id) => ({
     type : deleteTodo,
-    payload : index,
+    payload : id,
 });

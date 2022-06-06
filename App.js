@@ -7,14 +7,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import store from './src/redux/store/store'
 
+import TodoScreen from './src/screens/TodoScreen';
+
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-      <View>
-        <Text>Hello</Text>
-      </View>
-    </NavigationContainer>
+        <TodoScreen/>
+      </NavigationContainer>
     </Provider>
     
   );
