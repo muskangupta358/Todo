@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
 
   introView : {
     height : 200,
-    backgroundColor:'#2596be',
     marginBottom : 40,
   },
 

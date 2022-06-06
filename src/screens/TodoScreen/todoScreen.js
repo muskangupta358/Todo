@@ -3,6 +3,7 @@ import { Text, View,Image ,TouchableOpacity,TextInput,Animated,FlatList,Button,E
 import styles from './todoScreen.styles';
 import ListItem from '../../components/ListItem';
 import Input from '../../components/Input';
+import UserView from '../../components/userView';
 
 import { connect } from 'react-redux';
 import {add,edit,del} from '../../redux/actions/todoActions'
@@ -50,7 +51,9 @@ function TodoScreen(props){
     return (
         <View style={styles.container}>
 
-            <View style = {[styles.introView,styles.shadow]}></View>
+            <View style = {[styles.introView,styles.shadow]}>
+                <UserView/>
+            </View>
 
             <FlatList 
                 style = {styles.listView}
