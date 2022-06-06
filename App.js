@@ -6,7 +6,8 @@ import auth from '@react-native-firebase/auth';
 import {NavigationContainer} from '@react-navigation/native';
 
 import { Provider } from 'react-redux';
-import store from './src/redux/store/store'
+import {store,persistor} from './src/redux/store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { AuthStack,MainStack } from './AppNavigator';
 
@@ -29,21 +30,23 @@ export default function App() {
 
   if (!user) {
     return (
-      <Provider store={store} >
-        <NavigationContainer>
-          <AuthStack/>
-        </NavigationContainer>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer>
+            <AuthStack/>
+          </NavigationContainer>
+        </PersistGate>
       </Provider>
-      
     );
   }
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <MainStack/>
-      </NavigationContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <MainStack/>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
-    
   );
 }
