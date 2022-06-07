@@ -44,7 +44,7 @@ export default function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <MainStack/>
+          <MainStack user={user}/>
         </NavigationContainer>
       </PersistGate>
     </Provider>

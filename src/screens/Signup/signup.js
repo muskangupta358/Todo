@@ -1,6 +1,9 @@
 import React,{useState,useEffect} from 'react';
 import { Text, View,Image,TouchableOpacity,Alert} from 'react-native';
+
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
+
 import Input from '../../components/Input';
 import BackBtn from '../../components/backBtn';
 import valid_email from '../../lib/validEmail';
@@ -18,6 +21,15 @@ export default function SignUp(props){
     auth()
     .createUserWithEmailAndPassword(email,pass)
     .then(() => {
+      const userID = new Date().getTime();
+      database().ref('/Users').update({
+        [userID] : {
+          email : email,
+          username : user,
+          data : [{todo : 'First todo' , todoId : new Date().getTime()}]
+        }
+      })
+      .then(() => console.log('User set in database'));
       console.log('User account created & Logged in!');
     })
     .catch(error => {

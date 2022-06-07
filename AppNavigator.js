@@ -21,7 +21,7 @@ function AuthStack(){
 function MainStack(props){
   return(    
     <Stack2.Navigator screenOptions = {{headerTitleAlign:"center",headerShown:false}}>
-      <Stack2.Screen name="Todo" component={TodoScreen} />
+      <Stack2.Screen name="Todo" component={TodoScreen} initialParams={{ user : props.user._user.email }}/>
     </Stack2.Navigator>
     );
 }

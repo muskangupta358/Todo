@@ -1,4 +1,9 @@
-import { addTodo,editTodo,deleteTodo } from "../actionConstants";
+import { addTodo,editTodo,deleteTodo,setInitialstate } from "../actionConstants";
+
+export const setInitial = (item) => ({
+    type : setInitialstate,
+    payload : item
+})
 
 export const add = (item) => ({
 type : addTodo,

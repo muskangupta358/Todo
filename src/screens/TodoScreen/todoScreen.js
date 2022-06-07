@@ -1,12 +1,13 @@
-import React,{useState} from 'react';
-import { Text, View,Image ,TouchableOpacity,TextInput,Animated,FlatList,Button,Easing} from 'react-native';
+import React,{useState,useEffect} from 'react';
+import { Text, View,Image ,TouchableOpacity,TextInput,Animated,FlatList,Easing} from 'react-native';
+import database from '@react-native-firebase/database';
 import styles from './todoScreen.styles';
 import ListItem from '../../components/ListItem';
 import Input from '../../components/Input';
 import UserView from '../../components/userView';
 
 import { connect } from 'react-redux';
-import {add,edit,del} from '../../redux/actions/todoActions'
+import {add,edit,del, setInitial} from '../../redux/actions/todoActions'
 
 
 function TodoScreen(props){
@@ -15,7 +16,42 @@ function TodoScreen(props){
     const [todo, setTodo] = useState('');
     const [isEdit, setIsEdit] = useState(false);
     const [editId, setEditId] = useState(false);
+
+    useEffect(() => {
+        database()
+            .ref('/Users')
+            .once('value', snapshot => {
+            setData(snapshot.val())
+            });
+    }, []);
+
+
+    useEffect(() => {
+        database()
+            .ref('/Users')
+            .once('value', snapshot => {
+            userData(snapshot.val())
+            });
+    }, [props.data]);
+
     
+    const userData = (data) => {
+        for(let x in data)
+        {
+            if(data[x].email == props?.route.params.user){
+                database().ref(`/Users/${x}`).update({data : props.data})
+            }
+        }        
+    }
+
+    const setData = (data) => {
+        for(let x in data)
+        {
+            if(data[x].email == props?.route.params.user){
+                props.setInitial(data[x])
+            }
+        }        
+    }
 
     const renderItem = ({ item,index }) => (
         <ListItem text={item.todo} 
@@ -46,15 +82,15 @@ function TodoScreen(props){
 
     const pull_todo = (data) => {
         setTodo(data)
+        
     }
-
+    console.log(props.data)
     return (
         <View style={styles.container}>
 
             <View style = {[styles.introView,styles.shadow]}>
                 <UserView/>
             </View>
-
             <FlatList 
                 style = {styles.listView}
                 data={props.data}
@@ -100,6 +136,7 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
+        setInitial : (item) => dispatch(setInitial(item)),
         add : (item) => dispatch(add(item)),
         edit : (id,item) =>  dispatch(edit(id,item)),
         del : (id) =>  dispatch(del(id)),

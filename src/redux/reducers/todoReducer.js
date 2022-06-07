@@ -1,4 +1,4 @@
-import { addTodo,editTodo,deleteTodo } from "../actionConstants";
+import { addTodo,editTodo,deleteTodo,setInitialstate} from "../actionConstants";
 
 const initialState = {
     data: []
@@ -6,6 +6,9 @@ const initialState = {
 
 const todoReducer = (state=initialState,action) => {
     switch(action.type){
+        case setInitialstate : {
+            return {...state, data : action.payload.data}
+        }
         case addTodo : {
             return {...state, data : [...state.data,action.payload]};
         }
