@@ -1,5 +1,6 @@
 import React,{ useState } from 'react';
 import { Text, View,Image ,TouchableOpacity,Button,StyleSheet} from 'react-native';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 export default function ListItem(props){
     
@@ -7,7 +8,13 @@ export default function ListItem(props){
 
     return (
         <View style={styles.main}>
-            <Text style = {styles.heading}>{props?.text || 'Todo'}</Text>
+            <BouncyCheckbox
+                size={25}
+                fillColor="#2596be"
+                unfillColor="#FFFFFF"
+                textComponent = {<Text style = {styles.heading}>{props?.text || 'Todo'}</Text>}
+                iconStyle={{ borderColor: "#2596be" }}
+            />
             <TouchableOpacity style = {{position:'relative'}} onPress={()=>{setShow(!show)}}>
                 <Image style = {styles.menuImage} source={require('../assets/menuColored.png')}/>
                 {show && <View style = {[styles.subView,styles.shadow]}>
@@ -42,7 +49,9 @@ const styles = StyleSheet.create({
         width : 25,
     },
     heading : {
+        color : 'black',
         fontSize : 20,
+        marginLeft : 20
     },
     subView : {
         backgroundColor : 'white',

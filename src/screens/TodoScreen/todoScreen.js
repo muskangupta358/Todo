@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { Text, View,Image ,TouchableOpacity,TextInput,Animated,FlatList,Easing} from 'react-native';
+import { Text, View,Image ,TouchableOpacity,Animated,FlatList,Easing, Alert} from 'react-native';
 import database from '@react-native-firebase/database';
 import styles from './todoScreen.styles';
 import ListItem from '../../components/ListItem';
@@ -84,7 +84,6 @@ function TodoScreen(props){
         setTodo(data)
         
     }
-    console.log(props.data)
     return (
         <View style={styles.container}>
 
@@ -110,6 +109,10 @@ function TodoScreen(props){
                 </View>
                 <Input text={isEdit ? 'Change Todo' : 'Add New Todo'} onChangeText={pull_todo} value={todo}/>
                 <TouchableOpacity style = {[styles.saveBtn,styles.shadow]} onPress={() => {
+                    if(todo == ''){
+                        Alert.alert('Please enter some value')
+                    }
+                    else{
                         {isEdit ? (props.edit(editId,{todo : todo})) :
                         (props.add({
                             todo:todo,
@@ -117,6 +120,7 @@ function TodoScreen(props){
                         }))};
                         setTodo('')
                         cancelMenu();
+                    }
                         }}>
                     <Text style ={{color : 'white',fontWeight : 'bold'}}>Save</Text>
                 </TouchableOpacity>
