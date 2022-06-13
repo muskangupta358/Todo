@@ -2,9 +2,10 @@ import * as React from 'react';
 import {View, StyleSheet,TouchableOpacity,Image } from 'react-native';
 
 export default function BackBtn(props){
+    const { onClick } = props;
   return (
     <View style = {styles.button}>
-        <TouchableOpacity style = {styles.headerBtn} onPress = {props.onClick}>       
+        <TouchableOpacity style = {styles.headerBtn} onPress = {onClick}>       
             <Image style = {styles.logo} source={require('../assets/backButton.png')} tintColor='#2b5391'/>
         </TouchableOpacity>
     </View>

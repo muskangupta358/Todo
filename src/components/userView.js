@@ -4,6 +4,8 @@ import { Text, View,Image ,TouchableOpacity,StyleSheet} from 'react-native';
 
 export default function UserView(props){
 
+    const { user } = props;
+
     const logout = () =>{
         auth()
         .signOut()
@@ -19,7 +21,7 @@ export default function UserView(props){
         <View style = {styles.introView}>
             <View style = {styles.subView}>
                 <Text style = {styles.textMoney}>My Todo</Text>
-                <Text style={styles.textSmall}>Lets Get Listed</Text>
+                <Text style={styles.textSmall}>{user}</Text>
             </View>
             <View style = {styles.subView}>
                 <TouchableOpacity onPress={()=>{logout()}}>

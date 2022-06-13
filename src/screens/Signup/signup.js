@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
-import { Text, View,Image,TouchableOpacity,Alert} from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { Text, View,Image,TouchableOpacity} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import showAlert from '../../lib/AlertWrapper';
 
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
@@ -35,13 +36,13 @@ export default function SignUp(props){
     })
     .catch(error => {
       if (error.code === 'auth/email-already-in-use') {
-          Alert.alert('This email is already in use')
+          showAlert('This email is already in use')
       }
       else if (error.code === 'auth/invalid-email') {
-        Alert.alert('That email address is invalid!');
+        showAlert('That email address is invalid!')
       }
       else{
-        Alert.alert(JSON.stringify(error.code))
+        showAlert(JSON.stringify(error.code))
       }
     });
   }
@@ -84,19 +85,19 @@ export default function SignUp(props){
 
       <TouchableOpacity style={[styles.btn,styles.shadow]} onPress={()=>{
         if(user == ''){
-            Alert.alert('Please Enter Username')
+            showAlert('Please Enter Username')
         }
         else if(email == ''){
-            Alert.alert('Please Enter email')
+            showAlert('Please Enter email')
         }
         else if(pass == ''){
-            Alert.alert('Please Enter password')
+            showAlert('Please Enter password');
         }
         else if(confirmpass == ''){
-            Alert.alert('Please Enter confirm password')
+            showAlert('Please Enter confirm password')
         }
         else if(pass !== confirmpass){
-            Alert.alert('Passwords do not match')
+            showAlert('Passwords do not match');
         }
         else{
             signUp(email,pass)

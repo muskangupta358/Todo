@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import { Text, View,Image ,TouchableOpacity,Animated,FlatList,Easing, Alert} from 'react-native';
+import { Text, View,Image ,TouchableOpacity,Animated,FlatList,Easing} from 'react-native';
+
+import showAlert from '../../lib/AlertWrapper';
 import database from '@react-native-firebase/database';
 import styles from './todoScreen.styles';
 import ListItem from '../../components/ListItem';
@@ -16,6 +18,7 @@ function TodoScreen(props){
     const [todo, setTodo] = useState('');
     const [isEdit, setIsEdit] = useState(false);
     const [editId, setEditId] = useState(false);
+
 
     useEffect(() => {
         database()
@@ -41,7 +44,7 @@ function TodoScreen(props){
             if(data[x].email == props?.route.params.user){
                 database().ref(`/Users/${x}`).update({data : props.data})
             }
-        }        
+        }   
     }
 
     const setData = (data) => {
@@ -89,7 +92,7 @@ function TodoScreen(props){
         <View style={styles.container}>
 
             <View style = {[styles.introView,styles.shadow]}>
-                <UserView/>
+                <UserView user={props?.route.params.user}/>
             </View>
             <FlatList 
                 style = {styles.listView}
@@ -111,10 +114,10 @@ function TodoScreen(props){
                 <Input text={isEdit ? 'Change Todo' : 'Add New Todo'} onChangeText={pull_todo} value={todo}/>
                 <TouchableOpacity style = {[styles.saveBtn,styles.shadow]} onPress={() => {
                     if(todo == ''){
-                        Alert.alert('Please enter some value')
+                        showAlert('Please enter some value')
                     }
                     else if(todo.length > 20){
-                        Alert.alert('The given character limit is 20')
+                        showAlert('The given character limit is 20')
                     }
                     else{
                         {isEdit ? (props.edit(editId,{todo : todo})) :

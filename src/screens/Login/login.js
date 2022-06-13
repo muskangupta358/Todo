@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
-import { Text, View,Image,TouchableOpacity,Alert } from 'react-native';
+import { Text, View,Image,TouchableOpacity} from 'react-native';
+import showAlert from '../../lib/AlertWrapper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import auth from '@react-native-firebase/auth';
 import Input from '../../components/Input';
@@ -15,11 +16,11 @@ export default function Login(props){
   const login = (email,pass) => {
     if(email == '')
     {
-        Alert.alert('Please Enter Email')
+        showAlert('Please Enter Email')
     }
     else if(pass == '')
     {
-        Alert.alert('Please Enter Password')
+        showAlert('Please Enter Password')
     }
     else{
         auth().signInWithEmailAndPassword(email, pass)
@@ -27,7 +28,7 @@ export default function Login(props){
             console.log('Logged in!');
         })
         .catch(error => {
-            Alert.alert('Please Sign Up first')
+            showAlert('Please Sign Up first')
         });
     }
   }
