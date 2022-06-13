@@ -85,6 +85,7 @@ function TodoScreen(props){
         
     }
     return (
+        
         <View style={styles.container}>
 
             <View style = {[styles.introView,styles.shadow]}>
@@ -111,6 +112,9 @@ function TodoScreen(props){
                 <TouchableOpacity style = {[styles.saveBtn,styles.shadow]} onPress={() => {
                     if(todo == ''){
                         Alert.alert('Please enter some value')
+                    }
+                    else if(todo.length > 20){
+                        Alert.alert('The given character limit is 20')
                     }
                     else{
                         {isEdit ? (props.edit(editId,{todo : todo})) :

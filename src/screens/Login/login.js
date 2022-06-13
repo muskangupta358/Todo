@@ -1,5 +1,6 @@
-import React,{useState,useEffect} from 'react';
-import { Text, View, StyleSheet,Image,TextInput,TouchableOpacity,Alert } from 'react-native';
+import React,{useState} from 'react';
+import { Text, View,Image,TouchableOpacity,Alert } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import auth from '@react-native-firebase/auth';
 import Input from '../../components/Input';
 import valid_email from '../../lib/validEmail';
@@ -41,6 +42,7 @@ export default function Login(props){
   
 
   return (
+    <KeyboardAwareScrollView>
     <View style = {styles.main}>
       <View style = {styles.shadow}>
       <Image style = {styles.image} source={require('../../assets/Flower.webp')}/>
@@ -54,10 +56,11 @@ export default function Login(props){
           <Text style={styles.btnText}>LOGIN</Text>
       </TouchableOpacity>
 
-      <View style = {{flexDirection:'row', flexWrap:'wrap',marginBottom:30}}>
+      <View style = {{flexDirection:'row', flexWrap:'wrap',marginBottom:50}}>
         <Text style={styles.text2}>Don't have an account? </Text>
         <Text style={[styles.text2,{fontWeight : 'bold'}]} onPress={()=>{props.navigation.navigate('SignUp',{})}}>Sign Up</Text>
       </View>
-    </View>
+    </View>    
+    </KeyboardAwareScrollView>
   );
 }

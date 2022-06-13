@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import * as React from 'react';
 import auth from '@react-native-firebase/auth';
 import { Text, View,Image ,TouchableOpacity,StyleSheet} from 'react-native';
 

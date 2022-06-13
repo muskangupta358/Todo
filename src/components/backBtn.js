@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import { Text, View, StyleSheet,TouchableOpacity,Image } from 'react-native';
+import * as React from 'react';
+import {View, StyleSheet,TouchableOpacity,Image } from 'react-native';
 
 export default function BackBtn(props){
   return (

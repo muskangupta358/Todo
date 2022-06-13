@@ -1,5 +1,6 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import { Text, View,Image,TouchableOpacity,Alert} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
@@ -61,6 +62,7 @@ export default function SignUp(props){
     setConfirmpass(data)
   }
   return (
+    <KeyboardAwareScrollView>
     <View style = {styles.main}>
 
       <View style = {styles.shadow}>
@@ -103,11 +105,12 @@ export default function SignUp(props){
           <Text style={styles.btnText}>SIGN UP</Text>
       </TouchableOpacity>
 
-      <View style = {{flexDirection:'row', flexWrap:'wrap'}}>
+      <View style = {{flexDirection:'row', flexWrap:'wrap',marginBottom : 30}}>
         <Text style={styles.text2}>Already have an account? </Text>
         <Text style={[styles.text2,{fontWeight : 'bold'}]} onPress={()=>{props.navigation.navigate('Login',{})}}>Login</Text>
       </View>
 
     </View>
+    </KeyboardAwareScrollView>
   );
 }

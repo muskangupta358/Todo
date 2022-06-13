@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Login from './src/screens/Login/login';
-import SignUp from './src/screens/Signup/signup';
+import Login from './src/screens/Login';
+import SignUp from './src/screens/Signup';
 
 import TodoScreen from './src/screens/TodoScreen';
 
